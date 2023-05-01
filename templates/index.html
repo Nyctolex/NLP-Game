@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Word Cards</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+  <style>
+    .card {
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    {% for row in range(5) %}
+      <div class="row">
+        {% for col in range(5) %}
+          {% set index = row * 5 + col %}
+          {% if index < cards|length %}
+            {% set card = cards[index] %}
+            <div class="col-4 col-md-3 col-lg-2 mb-3">
+              <div class="card">
+                <div class="card-body" data-definition="{{ card.definition }}" data-word="{{ card.word }}">
+                  <h5 class="card-title">{{ card.word }}</h5>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Find Closest Words</title>
+  </head>
+  <body>
+    <label for="word">Enter a word:</label>
+    <input type="text" id="word" name="word">
+    <br>
+    <label for="wordsList">Enter a list of words:</label>
+    <input type="text" id="wordsList" name="wordsList">
+    <br>
+    <label for="n">Enter a number:</label>
+    <input type="number" id="n" name="n">
+    <br>
+    <button onclick="findClosestWords()">Find Closest Words</button>
+    <br>
+    <p id="output"></p>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="word2vec.js"></script>
+  </body>
+</html>
