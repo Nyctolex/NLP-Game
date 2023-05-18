@@ -1,0 +1,55 @@
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  width: 100%;
+  max-width: 960px; /* Example maximum width */
+  margin: 0 auto; /* Centers the container horizontally */
+}
+
+.card {
+  background-color: rgb(177, 179, 160);
+  border: 1px solid #ccc;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 10px; /* Adjust the value to control the roundness */
+}
+
+.red-card{
+  background-color: rgb(255, 43, 43);
+}
+.blue-card{
+  background-color: rgb(68, 0, 255);
+}
+.neutral-card{
+  background-color: rgb(207, 255, 36);
+}
+.bomb-card{
+  background-color: rgb(0, 0, 0);
+}
+
+.card-content {
+  overflow: hidden;
+  transition: height 0.3s ease;
+  height: auto;
+}
+.visible {
+  height: auto;
+  opacity: 1;
+}
+
+.hidden {
+  height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+
+.centered-text {
+  text-align: center; /* Center the text horizontally */
+  display: flex;
+  align-items: center; /* Center the text vertically */
+  justify-content: center; /* Center the text horizontally */
+
+}

@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route("/cards", methods=['GET'])
 def cards():
     c = []
-    for i in range(4*4):
+    for i in range(5*5):
         c.append({"title": "Card"+str(i),
                   "description": f'Description of card {i}'})
     return  {"cards": c}
