@@ -6,9 +6,7 @@ const MapBox = (props) =>{
 }
 
 const BoardMap = (props) => {
-    return <div className="board-map-container">
-
-
+    return <div className={`board-map-container ${props.gameState.turn+'-turn-container'}`}>
 {(typeof props.data.cards === 'undefined') ? (
     <p>Loading...</p>
    ) : (

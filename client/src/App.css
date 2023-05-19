@@ -1,5 +1,66 @@
 .App {
+  display: grid;
   text-align: center;
+  justify-items: center;
+  color:#FFFFFF
 }
 
 body {background-color: #000000;}
+
+.game-bottom-container{
+  display: inline-flex;
+  justify-content: center;
+  justify-items: center;
+  width: 100%;
+  margin-top: 50px;
+}
+.game-bottom-container > div {
+  margin-left: 100px;
+  margin-right: 100px;
+  
+}
+
+
+.button {
+  margin: 20px;
+  position: relative;
+  background-color: #4CAF50;
+  border: none;
+  font-size: 15px;
+  color: #FFFFFF;
+  padding: 10px;
+  width: 100px;
+  text-align: center;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button:after {
+  content: "";
+  background: #f1f1f1;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #161616;
+  background-color: #424242;
+  color: #666666;
+  cursor: no-drop
+}

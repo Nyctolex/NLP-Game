@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from "react";
-import Card from "./components/card/card";
-import GameBoard from "./components/card/gameBoard";
+import Card from "./components/Card/Card";
+import GameBoard from "./components/Card/GameBoard";
 import WordForm from "./components/head/wordForm";
 import BoardMap from "./components/boardMap/boardMap";
+import Popup from "./components/popup/Popup";
 import "./App.css"
+import { motion } from "framer-motion";
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import {Button, Alert} from 'react-bootstrap';
 class CardTypes {
   static BLUE = 'blue';
   static RED = 'red';
@@ -44,7 +48,7 @@ function generateBoardColors(numRed, numBlue, numNeutral, numBombs) {
 }
 
 
-function generateBoard(cardsData, setCardsData){
+function generateBoard(cardsData, setCardsData, setGameState){
 
  
   const groupes = [CardTypes.RED, CardTypes.BLUE]
@@ -71,35 +75,62 @@ function generateBoard(cardsData, setCardsData){
     });
     // Update the "cardsData" state variable with the new array
     setCardsData({cards: updatedCardsData, startingGroup: startingGroup});
-    console.log("aaaaaaaaaa")
-
+    setGameState({turn: startingGroup});
+    
+    console.log(cardsData)
 }
 
 function App() {
 
   const [colorState, setColorState] = useState(Array(25).fill(0))
-  // setColorState(Array(24).fill(0));
-
+  const [gameState, setGameState] = useState({turn:CardTypes.RED})
+  const [markedWords, setMarkedWords] = useState([])
   const [boardData, setBoardData] = useState([{}])
-  useEffect (() => {
-    fetch("/cards").then(
+  const [popupTrigger, setPopupTrigger] = useState(true)
+
+
+
+
+  const newGame = async () => {
+    const response = await fetch("/cards").then(
       res => res.json()
     ).then(
       data => {
+        setColorState(Array(25).fill(0))
         setBoardData(data)
-        generateBoard(data, setBoardData)
-        console.log(boardData)
+        setMarkedWords([]);
+        generateBoard(data, setBoardData, setGameState)
       }
     )
-  }, [])
+  }
 
+
+  
+  useEffect (() => {
+    newGame()}
+  , [])
 
 
   return(
-  <div >
-    <BoardMap data={boardData}/> <br></br>
-      <GameBoard data={boardData} colorState={colorState} />
-      <WordForm data={boardData} setColorState={setColorState}/> <br></br>
+  <div className="App">
+
+<Popup trigger={popupTrigger} setPopupTrigger={setPopupTrigger}>
+  <h1>Rules</h1>
+  <p>These are the rules of the game:</p>
+</Popup>
+
+
+    <motion.button whileHover={{scale:1.1}} whileTap={{scale:0.9}}
+    disabled={popupTrigger} className="button" type="button"  onClick={newGame}>New Game</motion.button>
+    <GameBoard data={boardData} colorState={colorState} />
+
+    <div className="game-bottom-container">
+    <WordForm popupTrigger={popupTrigger} data={boardData} setColorState={setColorState} markedWords={markedWords} setMarkedWords={setMarkedWords}/>
+      <BoardMap data={boardData} gameState={gameState}/> 
+      
+    </div>
+      
+    
       
       
   </div>);

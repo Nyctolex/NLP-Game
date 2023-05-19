@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
-import './card.css'
+import './Card.css'
+import Popup from "../popup/Popup";
 
 const Card = (props) => {
     const [isTextVisible, setIsTextVisible] = useState(false);
@@ -14,12 +15,17 @@ const Card = (props) => {
       <div className={`card ${props.colorState[props.index] !== 0 ? (props.cardType+'-card'): ''}`} onClick={handleCardClick}>
         <p className="centered-text">{props.title}</p>
 
-        <div className={`card-content ${isTextVisible ? 'visible' : 'hidden'}`} >
+        
+<Popup trigger = {isTextVisible} setPopupTrigger={setIsTextVisible}>
+<div className={`card-content`} >
+  <h1>{props.title}</h1>
         <hr></hr>
         <p className="centered-text">{props.description}</p>
         </div>
-
+</Popup>
       </div>
+
+    
 
     );
   };

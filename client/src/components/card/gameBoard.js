@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import Card from "./card";
-import './card.css'
+import Card from "./Card";
+import './Card.css'
 
 const GameBoard = (props) => {
 

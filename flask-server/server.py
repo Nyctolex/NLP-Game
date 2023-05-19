@@ -20,12 +20,13 @@ def newBoard():
 def association():
     word = request.json.get('word')
     words = request.json.get('words')
-    num = request.json.get('num')
+    num = int(request.json.get('num'))
     print('Received word:', word)
     print('Received words:', words)
     print('Received num:', num)
-    closestWords = [random.randint(0, 1) for _ in range(24)]
+    closestWords = random.sample(words, num)
     response = {'closetWords': closestWords}
+    print(response)
     return jsonify(response)
 
 

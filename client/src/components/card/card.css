@@ -9,9 +9,10 @@
 
 .card {
   background-color: rgb(177, 179, 160);
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
   padding: 10px;
   cursor: pointer;
+  transition-duration: 2s;
   border-radius: 10px; /* Adjust the value to control the roundness */
 }
 

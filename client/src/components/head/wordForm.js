@@ -5,6 +5,19 @@ function getCardsTitles(cards) {
   const titleList = cards.map((card) => card.title);
   return titleList;
 }
+function getObjectIndexesByTitle(objectList, titleList) {
+  const indexes = [];
+
+  for (let i = 0; i < objectList.length; i++) {
+    const object = objectList[i];
+    if (titleList.includes(object.title)) {
+      indexes.push(i);
+    }
+  }
+
+  return indexes;
+}
+
 
 const WordForm = (props) => {
   const [word, setWord] = useState("");
@@ -21,6 +34,8 @@ const WordForm = (props) => {
     event.preventDefault();
 
     try {
+      const words = getCardsTitles(props.data.cards)
+      const unMarkedWords = words.filter(word => !props.markedWords.includes(word));
       const response = await fetch("/association", {
         method: "POST",
         headers: {
@@ -28,15 +43,27 @@ const WordForm = (props) => {
         },
         body: JSON.stringify({
           word: word,
-          words: getCardsTitles(props.data.cards),
+          words: unMarkedWords,
           num:num,
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        props.setColorState(data.closetWords);
-        console.log("Retrieved value:", data);
+        const indexes = getObjectIndexesByTitle(props.data.cards, data.closetWords)
+        props.setColorState(prevState => {
+          const updatedState = [...prevState];
+          indexes.forEach(i => {
+            updatedState[i] = true;
+          })
+          
+          return updatedState;
+        });
+        props.setMarkedWords(prevState => {
+          return [...prevState,...data.closetWords] });
+        console.log(props.markedWords)
+      
+
       } else {
         console.error("Failed to retrieve value:", response.status);
       }
@@ -59,7 +86,7 @@ const WordForm = (props) => {
           placeholder="Enter a word"
         />
         <br />
-        <label>Number ofwords with assosiation:</label>
+        <label>Number of words with assosiation:</label>
 
         <input
           type="number"
@@ -71,7 +98,7 @@ const WordForm = (props) => {
         />
         <br />
 
-        <button type="submit">Submit</button>
+        <button  disabled={props.popupTrigger} className="form-button" type="submit">Submit</button>
       </form>
     </div>
   );
