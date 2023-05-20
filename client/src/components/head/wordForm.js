@@ -21,7 +21,7 @@ function getObjectIndexesByTitle(objectList, titleList) {
 
 const WordForm = (props) => {
   const [word, setWord] = useState("");
-  const [num, setNum] = useState("");
+  const [num, setNum] = useState("1");
 
   const handleWordInputChange = (event) => {
     setWord(event.target.value);

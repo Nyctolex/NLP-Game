@@ -20,7 +20,17 @@ const Card = (props) => {
 <div className={`card-content`} >
   <h1>{props.title}</h1>
         <hr></hr>
-        <p className="centered-text">{props.description}</p>
+        {
+
+props.description.map((description, i) => (
+  <div>
+  <p className="centered-text">{description}</p>
+  <hr Style="width:50%"></hr>
+  </div>
+))
+
+}
+        
         </div>
 </Popup>
       </div>
