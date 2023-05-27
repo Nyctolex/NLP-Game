@@ -1,49 +1,81 @@
-.form-container {
-  
-  display: grid;
-  margin: 0px auto;
-    justify-content: center;
-    justify-items: center;
-  
-    width: 20%;
-    align-items: center;
-    height: 10vh;
-    color: wheat;
-  }
-  
 
-  .form-button {
-    position: relative;
-    background-color: #4CAF50;
-    border: none;
-    font-size: 10px;
-    color: #FFFFFF;
-    padding: 10px;
-    margin: 10px;
-    width: 100px;
-    text-align: center;
-    transition-duration: 0.4s;
-    text-decoration: none;
-    overflow: hidden;
-    cursor: pointer;
-  }
+.top-left-background{
+  background-image: url('../../../public/images/ornamental-corners/top-left.svg'), url('../../../public/images/ornamental-corners/bottom-right.svg');
+  background-size:     100% 100%;
+  background-repeat:   no-repeat, no-repeat;
+  background-position:  right 24vh bottom 0%, right -24vh bottom 0%;
+}
+
+/* .top-right-background{
+  background-image: url('../../../public/images/ornamental-corners/top-left.svg');
+  background-size:     100% 100%;
+  background-repeat:   no-repeat;
+  background-position:  right 100px bottom 0%;
+} */
+
+.form-container {
+
   
-  .form-button:after {
-    content: "";
-    background: #f1f1f1;
-    display: block;
-    position: absolute;
-    padding-top: 300%;
-    padding-left: 350%;
-    margin-left: -20px !important;
-    margin-top: -120%;
-    opacity: 0;
-    transition: all 0.8s
-  }
-  
-  .form-button:active:after {
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s
-  }
+  border: 50 #000000;
+
+  background-color: #f1f1f1;
+  display: grid;
+  margin: 10px auto;
+  /* justify-content: center; */
+  /* justify-items: center; */
+
+  width: 30%;
+  height: 10vh;
+  border-radius: 10px;
+  /* align-items: center; */
+  color: rgb(185, 147, 74);
+}
+
+.form-button {
+  position: relative;
+  background-color: #3fc994;
+  border: none;
+  font-size: 10px;
+  color: #ffffff;
+  padding: 10px;
+  margin: 10px;
+  width: 100px;
+  text-align: center;
+  transition-duration: 0.4s;
+  border-radius: 10px;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.form-button:after {
+  content: "";
+  background: #f1f1f1;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s;
+}
+
+.form-button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s;
+}
+
+.input-box {
+  color: #000000;
+  text-align: center;
+  /* background-image: url('../../../public/frame.png'); */
+  background-size: 110% 160%;
+  background-repeat: no-repeat;
+  background-position: right 50% bottom 60%;
+  background-color: wheat;
+  border: 3px black;
+  border-radius: 10px;
+}

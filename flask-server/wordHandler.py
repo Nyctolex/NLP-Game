@@ -8,20 +8,22 @@ import nltk
 from nltk.corpus import wordnet
 from nltk.corpus import stopwords
 from typing import Union
-
+import gensim.downloader as api
 # Download the necessary resources (if not already downloaded)
-nltk.download('punkt')
-nltk.download('stopwords')
+# nltk.download('punkt')
+# nltk.download('stopwords')
+# nltk.download('punkt')
+# nltk.download('averaged_perceptron_tagger')
+# nltk.download('brown')
+# # Download the necessary resources (if not already downloaded)
+# nltk.download('wordnet')
 
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('brown')
-# Download the necessary resources (if not already downloaded)
-nltk.download('wordnet')
-
+MODELS_OPTIONS = ["glove-twitter-50", "glove-twitter-100", "glove-twitter-200", "glove-wiki-gigaword-300", "word2vec-google-news-300"]
 class WordHandler:
-    def __init__(self):
-        self.model =KeyedVectors.load_word2vec_format('.\\GoogleNews-vectors-negative300.bin',binary=True)
+    def __init__(self, model_name = "glove-twitter-100"):
+        self.model =word2vec = api.load(model_name)
+        print("Model is loaded")
+        # KeyedVectors.load_word2vec_format('./word2vec_twitter_model.bin',binary=True)
         corpus = nltk.corpus.brown
         self.word_freq_dist = nltk.FreqDist(corpus.words())
         # Get a set of common stop words
@@ -42,7 +44,7 @@ class WordHandler:
             print(word, freq)
             i = i+1
             # Skip if word is a stop word or less frequent than 2
-            if freq <= 4 or word in self.stop_words:
+            if freq <= 5 or word in self.stop_words:
                 continue
             
             if not self.definition_exists(word):
@@ -93,11 +95,11 @@ class WordHandler:
 
 if __name__ == "__main__":
     o = WordHandler()
-    # words_dict = o.get_words(10)
-    # words = [x['title'] for x in words_dict]
-    # word = words[3]
-    # print(words)
-    # print(word)
+    words_dict = o.get_words(10)
+    words = [x['title'] for x in words_dict]
+    word = words[3]
+    print(words)
+    print(word)
     print(o.get_k_nearest_neighbors("cook", ["cook", "rock", "ask"], 1))
     
         

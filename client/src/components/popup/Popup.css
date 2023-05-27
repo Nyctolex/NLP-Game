@@ -11,11 +11,17 @@
 }
 
 .popup-inner{
+    background-image: url('../../../public/images/label.png');
+    background-size:     100% 100%;
+    background-repeat:   no-repeat;
+    background-position:  right 50% bottom 60%;; 
+    color: black;
+
     position: relative;
     padding: 100%;
-    padding:32px;
-    max-width: 640px;
-    background-color: #777777;
+    padding:52px;
+    /* max-width: 640px; */
+    /* background-color: #777777; */
     border-radius: 10px;
 
 }
@@ -24,6 +30,7 @@
     position: absolute;
     top:16px;
     right: 16px;
+    z-index: 9999; /* Set a high value for the popup content */
 }
 
 .close-btn {

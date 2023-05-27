@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./wordForm.css";
+import { motion } from "framer-motion";
 
 function getCardsTitles(cards) {
   const titleList = cards.map((card) => card.title);
@@ -19,6 +20,7 @@ function getObjectIndexesByTitle(objectList, titleList) {
 }
 
 
+
 const WordForm = (props) => {
   const [word, setWord] = useState("");
   const [num, setNum] = useState("1");
@@ -30,13 +32,15 @@ const WordForm = (props) => {
     setNum(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     try {
-      const words = getCardsTitles(props.data.cards)
-      const unMarkedWords = words.filter(word => !props.markedWords.includes(word));
-      const response = await fetch("/association", {
+      const words = getCardsTitles(props.gameState.cards);
+      const unMarkedWords = words.filter(
+        (word) => !props.gameState.markedWords.includes(word)
+      );
+      const response = fetch("/association", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,29 +48,42 @@ const WordForm = (props) => {
         body: JSON.stringify({
           word: word,
           words: unMarkedWords,
-          num:num,
+          num: num,
         }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        const indexes = getObjectIndexesByTitle(props.data.cards, data.closetWords)
-        props.setColorState(prevState => {
-          const updatedState = [...prevState];
-          indexes.forEach(i => {
-            updatedState[i] = true;
-          })
+      }).then((response) => {
+        if (response.ok) {
+          response.json().then((data) =>{
+            const indexes = getObjectIndexesByTitle(
+              props.gameState.cards,
+              data.closetWords
+            );
+            
+            props.setGameState((prevState) => {
+              const updatedCards = [...prevState.cards];
+              indexes.forEach((i) => {
+                updatedCards[i] = { ...updatedCards[i], marked: true };
+              });
+            
+              return {
+                ...prevState,
+                cards: updatedCards,
+                markedWords: [...prevState.markedWords, ...data.closetWords],
+                turn: prevState.turn === props.CardTypes.RED ? props.CardTypes.BLUE : props.CardTypes.RED,
+              };
+            });
+          });
           
-          return updatedState;
-        });
-        props.setMarkedWords(prevState => {
-          return [...prevState,...data.closetWords] });
-        console.log(props.markedWords)
-      
+          
 
-      } else {
-        console.error("Failed to retrieve value:", response.status);
-      }
+          
+        }         else if (response.status === 400){
+          alert("Couldn't find this word, please try a diffrent one");
+        } 
+
+        else {
+          console.error("Failed to retrieve value:", response.status);
+        }
+      });
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -76,11 +93,13 @@ const WordForm = (props) => {
   };
 
   return (
-    <div className="form-container">
+    <div className="form-container top-left-background top-right-background">
       <form onSubmit={handleSubmit}>
         <label>Assosiation:</label>
         <input
+          className="input-box"
           type="text"
+          required="required"
           value={word}
           onChange={handleWordInputChange}
           placeholder="Enter a word"
@@ -89,16 +108,25 @@ const WordForm = (props) => {
         <label>Number of words with assosiation:</label>
 
         <input
+          className="input-box"
           type="number"
           value={num}
           onChange={handleWordNumChange}
           placeholder="1"
           min="1"
-          max="9"
+          max="24"
         />
         <br />
 
-        <button  disabled={props.popupTrigger} className="form-button" type="submit">Submit</button>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          disabled={!props.gameState.activated}
+          className="form-button"
+          type="submit"
+        >
+          Submit
+        </motion.button>
       </form>
     </div>
   );

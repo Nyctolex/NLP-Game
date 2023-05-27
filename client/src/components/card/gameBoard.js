@@ -3,15 +3,15 @@ import Card from "./Card";
 import './Card.css'
 
 const GameBoard = (props) => {
-
-
   
     return <div className="card-container">
-   {(typeof props.data.cards === 'undefined') ? (
+      
+   {(typeof props.gameState.cards === 'undefined') ? (
     <p>Loading...</p>
    ) : (
-    props.data.cards.map((cardData, i) => (
-      <Card title={cardData.title} description={cardData.description} cardType ={cardData.type} colorState={props.colorState} index={i}> </Card>
+    
+    props.gameState.cards.map((cardData, i) => (
+      <Card cardData = {cardData} setGameState={props.setGameState} gameState={props.gameState}> </Card>
     ))
    )}
     </div>;

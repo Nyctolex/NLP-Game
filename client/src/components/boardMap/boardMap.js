@@ -4,14 +4,13 @@ import './boardMap.css'
 const MapBox = (props) =>{
     return <div className={`map-box ${(props.cardType+'-box')}`}></div>
 }
-
 const BoardMap = (props) => {
     return <div className={`board-map-container ${props.gameState.turn+'-turn-container'}`}>
-{(typeof props.data.cards === 'undefined') ? (
+{(typeof props.gameState.cards === 'undefined') ? (
     <p>Loading...</p>
    ) : (
-    props.data.cards.map((cardData, i) => (
-      <MapBox cardType ={cardData.type} index={i}> </MapBox>
+    props.gameState.cards.map((cardData, i) => (
+      <MapBox cardData={cardData} cardType ={cardData.type} index={i}> </MapBox>
     ))
 
    )}

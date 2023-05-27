@@ -29,8 +29,9 @@ def association():
     # print('Received words:', words)
     # print('Received num:', num)
     # closestWords = random.sample(words, num)
+    if closestWords is None:
+        return "No similar words found", 400
     response = {'closetWords': closestWords}
-    # print(response)
     return jsonify(response)
 
 
