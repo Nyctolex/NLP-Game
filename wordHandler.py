@@ -11,17 +11,20 @@ from typing import Union
 import gensim.downloader as api
 # Download the necessary resources (if not already downloaded)
 # nltk.download('punkt')
-# nltk.download('stopwords')
+
 # nltk.download('punkt')
 # nltk.download('averaged_perceptron_tagger')
-# nltk.download('brown')
-# # Download the necessary resources (if not already downloaded)
-# nltk.download('wordnet')
+
+# Download the necessary resources (if not already downloaded)
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('brown')
 
 MODELS_OPTIONS = ["glove-twitter-50", "glove-twitter-100", "glove-twitter-200", "glove-wiki-gigaword-300", "word2vec-google-news-300"]
 class WordHandler:
-    def __init__(self, model_name = "glove-twitter-100"):
-        self.model =word2vec = api.load(model_name)
+    def __init__(self, model_name = "glove-twitter-50"):
+        print("Loading NLP model")
+        self.model = api.load(model_name)
         print("Model is loaded")
         # KeyedVectors.load_word2vec_format('./word2vec_twitter_model.bin',binary=True)
         corpus = nltk.corpus.brown
@@ -34,7 +37,7 @@ class WordHandler:
     def definition_exists(self, word:str)->bool:
         return len(wordnet.synsets(word)) > 0
         
-    def get_frequent_words(self, n: int, sfw: bool = True) -> list[str]:
+    def get_frequent_words(self, n: int, sfw: bool = True, min_freq:int = 4) -> list[str]:
         # Create a list of the most frequent SFW words
         random.shuffle(self.most_common_words)  # Shuffle the word list
         word_list: list[str] = []
@@ -44,7 +47,7 @@ class WordHandler:
             print(word, freq)
             i = i+1
             # Skip if word is a stop word or less frequent than 2
-            if freq <= 5 or word in self.stop_words:
+            if freq <= min_freq or word in self.stop_words:
                 continue
             
             if not self.definition_exists(word):
