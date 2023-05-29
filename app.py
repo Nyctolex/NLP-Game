@@ -1,21 +1,49 @@
-from flask import Flask, render_template
-import generate_words
-import random
+from flask import Flask, request, jsonify, send_from_directory
+import os
+from wordHandler import WordHandler
 
-app = Flask(__name__)
-app.static_folder = 'static'  # set the static folder
+app = Flask(__name__, static_folder='client/build')
+if not 'wordHandler' in globals():
+    wordHandler = WordHandler()
+
+# Serve React App
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
+
+@app.route("/cards", methods=['GET'])
+def cards():
+    # c = []
+    # for i in range(5*5):
+    #     c.append({"title": "Card"+str(i),
+    #               "description": f'Description of card {i}'})
+    cards_dict = wordHandler.get_words(5*5)
+    return  {"cards": cards_dict}
+
+@app.route("/newBoards", methods=['GET'])
+def newBoard():
+    cardsdict = cards()
+    return cardsdict
+
+@app.route('/association', methods=['POST'])
+def association():
+    word = request.json.get('word')
+    words = request.json.get('words')
+    num = int(request.json.get('num'))
+    closestWords = wordHandler.get_k_nearest_neighbors(word, words, num)
+    # print('Received word:', word)
+    # print('Received words:', words)
+    # print('Received num:', num)
+    # closestWords = random.sample(words, num)
+    if closestWords is None:
+        return "No similar words found", 400
+    response = {'closetWords': closestWords}
+    return jsonify(response)
 
 
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    word_list = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig', 'grape', 'honeydew', 'kiwi', 'lemon', 'mango', 'nectarine', 'orange', 'pear', 'quince', 'raspberry', 'strawberry', 'tangerine', 'watermelon']
-    random.shuffle(word_list)
-    words = generate_words.get_word_definitions(25)
-    cards = [{'word': word, 'definition': 'This is the definition of ' + word} for word in word_list]
-    cards = [{'word': word, 'definition': words[word]} for word in words]
-    return render_template('index.html', cards=cards)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))

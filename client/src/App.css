@@ -1,0 +1,84 @@
+.App {
+  display: grid;
+  text-align: center;
+  justify-items: center;
+  color:#FFFFFF
+}
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+@font-face {
+  font-family: VeniceBridge;
+  src: url('../public/fonts/venice_bridge/VeniceBridge.otf');
+}
+@font-face {
+  font-family: breamcatcher;
+  src: url('../public/fonts/breamcatcher/breamcatcher\ rg.otf');
+}
+
+@font-face {
+  font-family: BLKCHCRY;
+  src: url('../public/fonts/blackchancery/BLKCHCRY.TTF');
+}
+body {
+  /* font-family: BLKCHCRY; */
+ background-image: url("../public/images/main-background-darken.png");
+  background-color: #edffc2;}
+
+.game-bottom-container{
+  display: inline-flex;
+  justify-content: center;
+  justify-items: center;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.game-bottom-container > div {
+  margin-left: 100px;
+  margin-right: 100px;
+  
+}
+
+
+.button {
+  border-radius: 10px;
+  margin: 20px;
+  position: relative;
+  background-color: #63a1e9;
+  border: none;
+  font-size: 15px;
+  color: #FFFFFF;
+  padding: 10px;
+  width: 100px;
+  text-align: center;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button:after {
+  content: "";
+  background: #f1f1f1;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #161616;
+  background-color: #424242;
+  color: #666666;
+  cursor: no-drop
+}
