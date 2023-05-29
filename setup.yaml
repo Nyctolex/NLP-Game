@@ -1,0 +1,11 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - docker build -t association-game:latest .
+      - docker run association-game:latest /bin/sh -c -p 80:80
+
+artifacts:
+  files:
+    - '**/*'
