@@ -1,7 +1,8 @@
 from flask import Flask, request, jsonify, send_from_directory
 import os
 
-app = Flask(__name__, static_folder='client/build')
+application = Flask(__name__, static_folder='client/build')
+app = application
 # if not 'wordHandler' in globals():
 #     wordHandler = WordHandler()
 
