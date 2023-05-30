@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c71a2aa3.css",
+    "main.js": "/static/js/main.b50cdeed.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/main-background-darken.png": "/static/media/main-background-darken.22a9131438397ab07662.png",
+    "static/media/label.png": "/static/media/label.8b69e6099254b0c546eb.png",
+    "static/media/blue-frame.svg": "/static/media/blue-frame.abfaa2b623958e0d59f9.svg",
+    "static/media/green-frame.svg": "/static/media/green-frame.481e1cb5182633dde0c1.svg",
+    "static/media/BLKCHCRY.TTF": "/static/media/BLKCHCRY.7d521baec2350e17620c.TTF",
+    "static/media/breamcatcher rg.otf": "/static/media/breamcatcher rg.24a8b9813b38812b5fcd.otf",
+    "static/media/gradient.svg": "/static/media/gradient.efe048564c1070572ade.svg",
+    "static/media/VeniceBridge.otf": "/static/media/VeniceBridge.6d947bfe68bc003ecc4c.otf",
+    "static/media/bottom-right.svg": "/static/media/bottom-right.03928087f7d19e02f5cd.svg",
+    "static/media/top-left.svg": "/static/media/top-left.d515c99a746bdb6de9c7.svg",
+    "index.html": "/index.html",
+    "main.c71a2aa3.css.map": "/static/css/main.c71a2aa3.css.map",
+    "main.b50cdeed.js.map": "/static/js/main.b50cdeed.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c71a2aa3.css",
+    "static/js/main.b50cdeed.js"
+  ]
+}
