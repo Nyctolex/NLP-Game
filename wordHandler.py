@@ -22,7 +22,7 @@ MODELS_OPTIONS = ["glove-twitter-50", "glove-twitter-100", "glove-twitter-200", 
 class WordHandler:
     def __init__(self, model_name = "glove-twitter-50"):
         print("Starting to load model")
-        self.model = api.load(model_name)
+        # self.model = api.load(model_name)
         print("Model is loaded")
         # KeyedVectors.load_word2vec_format('./word2vec_twitter_model.bin',binary=True)
         corpus = nltk.corpus.brown
@@ -51,7 +51,7 @@ class WordHandler:
             if not self.definition_exists(word):
                 continue
 
-            if word in self.model.key_to_index and word not in word_list:
+            if word not in word_list:
                 word_list.append(word)
                 if len(word_list) == n:
                     break
@@ -77,11 +77,9 @@ class WordHandler:
         return return_list
     
     def get_distance(self, word1, word2):
-        return self.model.similarity(word1, word2)
+        return 1
     
     def get_k_nearest_neighbors(self, word, word_list, k):
-        if not word in self.model.key_to_index:
-            return None
         # Calculate distances between the given word and all words in the list
         distances = [(w, self.get_distance(word, w)) for w in word_list]
 
