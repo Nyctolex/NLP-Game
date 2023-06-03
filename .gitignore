@@ -1,7 +1,9 @@
 .venv
+.vnev
 node_modules
 __pycache__
 *.bin
 *.gz
 *.pyc
 *.pyc
+client

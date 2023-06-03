@@ -1,0 +1,1 @@
+gcloud run deploy --image gcr.io/assosiaction-game-backend/flask-fire
