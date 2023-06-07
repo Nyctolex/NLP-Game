@@ -23,4 +23,5 @@ pip install -r requirements.txt
 python application.py
 ```
 
-![image](https://github.com/Nyctolex/NLP-Game/assets/65441185/b6b3d208-94d0-4642-a061-5ec2e6692e72)
+![image](https://github.com/Nyctolex/NLP-Game/assets/65441185/cfb7ab66-95bd-45c1-86af-30ddc21de307)
+
