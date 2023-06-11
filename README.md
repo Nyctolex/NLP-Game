@@ -1,4 +1,13 @@
-# NLP-Game
+<h1 align="center"> NLP-Game </h1>
+<p align="center">
+<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Nyctolex/NLP-Game?logo=github">
+<img alt="GitHub language count" src="https://img.shields.io/github/languages/count/Nyctolex/NLP-Game">
+<a href="https://pytorch.org/"><img alt="PyTorch Version" src="https://img.shields.io/badge/Flask-2.3.2-blue?logo=flask&style=flat-square"></a>
+  <a href="https://pytorch.org/"><img alt="PyTorch Version" src="https://img.shields.io/badge/React-13.4.0-blue?logo=react&style=flat-square"></a>
+<img alt="Bitbucket open issues" src="https://img.shields.io/bitbucket/issues/Nyctolex/NLP-Game">
+<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Nyctolex/NLP-Game">
+<p>
+  
 Lets play Codenames vs the computer using KNN, NLP and word to vec.
 The idea of the game is splitting into two teams, where each group have to make the computer guess their secret words. 
 To use this code you could either use docker by
